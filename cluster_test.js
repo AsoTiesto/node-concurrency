@@ -17,8 +17,12 @@ if (cluster.isMaster) {
 } else {
   http
     .createServer((req, res) => {
+      let sum = 0;
+      for (let i = 0; i < 1e7; i++) {
+        sum += i;
+      }
       res.writeHead(200);
-      res.end(`Handled by worker ${process.pid}`);
+      res.end(`Handled by worker ${process.pid} with sum: ${sum}`);
     })
     .listen(8002);
 
